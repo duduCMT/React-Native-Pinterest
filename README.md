@@ -1,3 +1,5 @@
+![](.github/assets/images/logo.png)
+
 # Pinterest UI (App Clone) - React Native
 [![](https://img.shields.io/badge/View-Em%20Desenvolvimento-red)]() 
 [![](https://img.shields.io/badge/version-1.0.0-yellow)](#)
