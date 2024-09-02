@@ -1,6 +1,9 @@
 import { Tabs } from "expo-router";
 import { Foundation, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { theme } from "@/theme";
+import { Avatar } from "@/components/Avatar";
+
+const activeTintColor = theme.colors.white;
 
 export default function TabLayout() {
   return (
@@ -8,7 +11,7 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarActiveTintColor: theme.colors.white,
+        tabBarActiveTintColor: activeTintColor,
         tabBarInactiveTintColor: theme.colors.gray[600],
         tabBarStyle: {
           backgroundColor: theme.colors.black,
@@ -42,6 +45,11 @@ export default function TabLayout() {
       />
       <Tabs.Screen 
         name="profile" 
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <Avatar selected={color === activeTintColor} source={{ uri: "https://github.com/duducmt.png" }} />  
+          )
+        }}
       />
     </Tabs>
   );
