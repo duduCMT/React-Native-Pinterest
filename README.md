@@ -1,6 +1,6 @@
 ![](.github/assets/images/logo.png)
 
-# Pinterest UI (App Clone) - React Native
+# Pinterest UI (UI Clone) - React Native
 [![](https://img.shields.io/badge/View-Em%20Desenvolvimento-red)]() 
 [![](https://img.shields.io/badge/version-1.0.0-yellow)](#)
 
@@ -24,6 +24,11 @@ Projeto para prática e aprendizado da utilização das libs do Expo 2.0 mais re
 2. Após a instalação, você deve rodar o projeto localmente usando o comando `npm start` e escolher as opções para execução a depender do ambiente. (Esse projeto também é compatível com o Expo Go.)
 3. Caso queira executar o expo e limpar o cache, use `expo start -c` para executar e limpar o cache.
 
+
+## 📚 Libs Utilizadas
+
+- Expo Router
+- React Native Gesture Handler
 
 ## 🗑️ Limpar Chache do EXPO - Windows
 Em algumas situações, vai ser necessário limpar o cache do EXPO, para isso, execute os seguintes passos ou confira a [documentação oficial](https://docs.expo.dev/troubleshooting/clear-cache-windows/):
