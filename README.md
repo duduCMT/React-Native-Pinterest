@@ -27,8 +27,9 @@ Projeto para prática e aprendizado da utilização das libs do Expo 2.0 mais re
 
 ## 📚 Libs Utilizadas
 
-- Expo Router
-- React Native Gesture Handler
+- [Expo Router](https://docs.expo.dev/router/introduction/)
+- [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/docs/)
+- [React Native Bottom Sheet](https://ui.gorhom.dev/components/bottom-sheet/)
 
 ## 🗑️ Limpar Chache do EXPO - Windows
 Em algumas situações, vai ser necessário limpar o cache do EXPO, para isso, execute os seguintes passos ou confira a [documentação oficial](https://docs.expo.dev/troubleshooting/clear-cache-windows/):
