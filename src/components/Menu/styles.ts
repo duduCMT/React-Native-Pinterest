@@ -21,7 +21,9 @@ export const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
   },
-  close: {
-    
+  options: {
+    flexDirection: "row",
+    gap: 16,
+    marginTop: 32,  
   },
 });
