@@ -1,8 +1,11 @@
-import { Filters } from "@/components/Filters";
-import { FILTERS } from "@/constants/FiltersConstants";
-import { theme } from "@/theme";
 import { useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
+
+import { Filters } from "@/components/Filters";
+import { Posts } from "@/components/Posts";
+import { FILTERS } from "@/constants/FiltersConstants";
+import { POSTS } from "@/constants/PostsConstants";
+import { theme } from "@/theme";
 
 export default function Home() {
   const [filter, setFilter] = useState(FILTERS[0]);
@@ -14,6 +17,8 @@ export default function Home() {
         onChange={setFilter} 
         filter={filter} 
       />
+
+      <Posts posts={POSTS} />
     </View>
   );
 };

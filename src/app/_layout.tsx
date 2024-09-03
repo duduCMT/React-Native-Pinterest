@@ -4,20 +4,28 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
 
 import { useFonts, Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto"
+import { useEffect } from "react";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, fontsError] = useFonts({
     Roboto_400Regular,
     Roboto_500Medium,
     Roboto_700Bold,
   });
 
-  if(!fontsLoaded) {
-    SplashScreen.hideAsync();
-  }
+  useEffect(() => {
+    if (fontsLoaded || fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontsError]);
 
+
+  if(!fontsLoaded && !fontsLoaded) {
+    return null;
+  }
+  
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar barStyle="light-content" />
