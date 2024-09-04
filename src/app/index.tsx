@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { StyleSheet, useWindowDimensions, View } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated";
+import Animated, { runOnJS, SlideInDown, useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated";
 import { Skeleton } from "moti/skeleton";
 
 import { theme } from "@/theme";
+import { router } from "expo-router";
 
 const skeletonColors = [
   theme.colors.gray[600],
@@ -14,6 +15,7 @@ const skeletonColors = [
 export default function Splash() {
   const logoScale = useSharedValue(1);
   const logoPositionY = useSharedValue(0);
+  const contentDisplay = useSharedValue(0);
 
   const dimensions = useWindowDimensions();
 
@@ -24,19 +26,31 @@ export default function Splash() {
     ]
   }));
 
+  const contentAnimatedStyles = useAnimatedStyle(() => ({
+    display: contentDisplay.value === 1 ? "flex" : "none",
+  }));
+
   const logoAnimation = () => {
     logoScale.value = withSequence(
       withTiming(0.7),
       withTiming(1.3),
       withTiming(1, undefined, (finished) => {
-        if(finished) {
+        if (finished) {
           logoPositionY.value = withSequence(
-            withTiming(50),
+            withTiming(50, undefined, (finished) => contentDisplay.value = 1),
             withTiming(-dimensions.height, { duration: 400 }),
-          )
+          );
+
+          runOnJS(onEndSplash)();
         }
       }),
     );
+  };
+
+  const filters = () => {
+    return Array.from({ length: 10 }).map((_, index) => (
+      <Skeleton key={index} colors={skeletonColors} width={60} height={26} radius={6} />
+    ));
   };
 
   const boxes = (column: "right" | "left") => {
@@ -52,7 +66,13 @@ export default function Splash() {
           </Animated.View>
         );
       });
-  }
+  };
+
+  const onEndSplash = () => {
+    setTimeout(() => {
+      router.replace("/(tabs)");
+    }, 2000);
+  };
 
   useEffect(() => {
     logoAnimation();
@@ -61,14 +81,20 @@ export default function Splash() {
   return (
     <View style={styles.container}>
       <Animated.Image source={require("@/assets/images/logo.png")} style={[styles.logo, logoAnimatedStyles]} />
-      <View style={styles.boxes}>
-        <View style={styles.column}>
-          {boxes("left")}
+      <Animated.View style={[styles.content, contentAnimatedStyles]} entering={SlideInDown.duration(400)}>
+        <View style={styles.header}>
+          {filters()}
         </View>
-        <View style={styles.column}>
-          {boxes("right")}
+
+        <View style={styles.boxes}>
+          <View style={styles.column}>
+            {boxes("left")}
+          </View>
+          <View style={styles.column}>
+            {boxes("right")}
+          </View>
         </View>
-      </View>
+      </Animated.View>
     </View>
   );
 };
@@ -79,16 +105,27 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.black,
     justifyContent: "center",
     alignItems: "center",
+    paddingHorizontal: 12,
+  },
+  content: {
+    flex: 1,
+    width: "100%",
   },
   logo: {
     height: 64,
     width: 64,
+  },
+  header: {
+    width: "100%",
+    flexDirection: "row",
+    gap: 16,
   },
   boxes: {
     flex: 1,
     width: "100%",
     flexDirection: "row",  
     gap: 16,
+    marginTop: 12,
   },
   box: {
     width: "100%",
