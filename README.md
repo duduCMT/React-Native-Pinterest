@@ -8,7 +8,7 @@
 
 <div align="center">
   <div style="display: flex; justify-content: center;">
-    <img src=".github/assets/images/preview01.gif" style="height: 420px;">
+    <img src=".github/assets/images/preview01.gif" style="min-height: 500px;">
   </div>
 </div>
 
